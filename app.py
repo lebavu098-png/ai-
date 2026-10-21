@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 from g4f.client import Client
+import g4f.Provider
 import os
 
 app = Flask(__name__)
@@ -14,19 +15,20 @@ def chat():
     user_message = request.json.get("message", "")
     
     if not user_message.strip():
-        return jsonify({"reply": "Vui lòng nhập tin nhắn!"})
+        return jsonify({"reply": "Vui lòng nhập nội dung tin nhắn!"})
     
     try:
-        # Gọi AI miễn phí qua g4f
+        # Sử dụng provider cụ thể không cần xác thực rườm rà
         response = client.chat.completions.create(
-            model="gpt-3.5-turbo",
+            model="gpt-4o-mini", # Hoặc gpt-3.5-turbo
+            provider=g4f.Provider.PollinationsAI, # Nhà cung cấp ổn định, miễn phí không cần key
             messages=[{"role": "user", "content": user_message}]
         )
         bot_reply = response.choices[0].message.content
         return jsonify({"reply": bot_reply})
         
     except Exception as e:
-        return jsonify({"reply": f"Xin lỗi, hiện tại hệ thống AI đang bận. Bạn thử lại sau nhé! (Lỗi: {str(e)})"})
+        return jsonify({"reply": f"Hệ thống đang bận, bạn đợi lát nhắn lại nhé! (Chi tiết: {str(e)})"})
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
