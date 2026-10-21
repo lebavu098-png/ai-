@@ -5,7 +5,7 @@ import os
 app = Flask(__name__)
 
 # Lấy API Key từ biến môi trường trên Render
-API_KEY = os.environ.get("API_KEY", "sk-xt-4782187895af7e7cc0085d42b96eb7c5836fe08fc0310166")
+API_KEY = os.environ.get("API_KEY", "sk-xt-0c18a0486c036a6a1c8ea9fd8542243930acfec15726a3c3")
 XKIRO_API_URL = "https://api.xkiro.com/v1/chat/completions"
 
 @app.route("/")
