@@ -4,7 +4,7 @@ import requests
 app = Flask(__name__)
 
 # Thay thế bằng API Key thực tế của bạn
-API_KEY = "sk-xt-a98d4d8eb8c587537c9f84c47d5c1eb21db1af58cfa31e25"
+API_KEY = "sk-xt-4782187895af7e7cc0085d42b96eb7c5836fe08fc0310166"
 GEMINI_API_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key={API_KEY}"
 
 @app.route("/")
